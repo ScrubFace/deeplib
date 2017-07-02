@@ -48,4 +48,4 @@ class NeuralNetwork:
     def print_weights(self):
         for layer in xrange(len(numLayers)):
             print "Layer" + layer + ":"
-            print self.numLayers[layer].synaptic_weights    
+            print self.numLayers[layer].synaptic_weights
