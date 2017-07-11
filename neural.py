@@ -21,23 +21,24 @@ class NeuralNetwork:
 
     def backp(self, train_input, train_ouput, num_iterations):
         for iteration in xrange(num_iterations):
-            for layer in xrange(len(numLayers)):
-
-                if layer == 1:
+            for layer in xrange(len(self.numLayers)):
+                
+                if layer > 1:
                     output_from_layer_1 = self.calc(train_input)
-                    layer1_error = layerx_delta.dot(self.numLayers[1].synaptic_weights.T)
-                    layer1_delta = layer1_error * self.derivative(output_from_layer_1)
-                    layer1_adjustment = training_input.T.dot(layer1_delta)
-                    self.numLayers[0].synaptic_weights += layer1_adjustment
-                else:
-                    output_from_layer_x = self.calc(train_inputs)
-                    layerx_error = training_set_outputs - output_from_layer_x
-                    layerx_delta = layer2_error * self.derivative(output_from_layer_x)
+                    output_from_layer_x = self.calc(train_input)
+                    layerx_error = train_ouput - output_from_layer_x
+                    layerx_delta = layerx_error * self.derivative(output_from_layer_x)
                     layerx_adjustment = output_from_layer_1.T.dot(layerx_delta)
                     self.numLayers[layer].synaptic_weights += layerx_adjustment
+                    
+                else:
+                    layer1_error = layerx_delta.dot(self.numLayers[1].synaptic_weights.T)
+                    layer1_delta = layer1_error * self.derivative(output_from_layer_1)
+                    layer1_adjustment = train_input.T.dot(layer1_delta)
+                    self.numLayers[0].synaptic_weights += layer1_adjustment
 
     def calc(self, inputs):
-        for layer in xrange(len(numLayers)):
+        for layer in xrange(len(self.numLayers)):
             if layer == 1:
                 output_from_layer1 = self.logistic(dot(inputs, self.numLayers[0].synaptic_weights))
                 return output_from_layer1
@@ -46,6 +47,6 @@ class NeuralNetwork:
                 return output_from_layerx
 
     def print_weights(self):
-        for layer in xrange(len(numLayers)):
+        for layer in xrange(len(self.numLayers)):
             print "Layer" + layer + ":"
             print self.numLayers[layer].synaptic_weights
