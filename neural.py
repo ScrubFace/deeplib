@@ -1,10 +1,10 @@
 from numpy import exp, dot, array, random
 
-class Layers:
+class Layers():
     def __init__(self, number_of_output_neurons, number_of_input_neurons):
         self.synaptic_weights = 2 * random.random((number_of_input_neurons, number_of_output_neurons)) - 1
 
-class NeuralNetwork:
+class NeuralNetwork():
     def __init__(self):
         self.numLayers = []
         self.num_layers = 0
@@ -46,7 +46,7 @@ class NeuralNetwork:
                 output_from_layerx = self.logistic(dot(output_from_layer1, self.numLayers[layer].synaptic_weights))
                 return output_from_layerx
 
-    def print_weights(self):
+    def printweights(self):
         for layer in xrange(len(self.numLayers)):
             print "Layer" + layer + ":"
             print self.numLayers[layer].synaptic_weights
